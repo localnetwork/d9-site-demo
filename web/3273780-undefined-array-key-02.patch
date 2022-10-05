@@ -1,0 +1,13 @@
+diff --git a/core/lib/Drupal/Core/Entity/EntityAccessCheck.php b/core/lib/Drupal/Core/Entity/EntityAccessCheck.php
+index 341fcc54fb..c222b94aac 100644
+--- a/core/lib/Drupal/Core/Entity/EntityAccessCheck.php
++++ b/core/lib/Drupal/Core/Entity/EntityAccessCheck.php
+@@ -59,7 +59,7 @@ class EntityAccessCheck implements AccessInterface {
+   public function access(Route $route, RouteMatchInterface $route_match, AccountInterface $account) {
+     // Split the entity type and the operation.
+     $requirement = $route->getRequirement('_entity_access');
+-    [$entity_type, $operation] = explode('.', $requirement);
++    [$entity_type, $operation] = array_pad(explode('.', $requirement), 2, NULL);
+     // If $entity_type parameter is a valid entity, call its own access check.
+     $parameters = $route_match->getParameters();
+     if ($parameters->has($entity_type)) {
